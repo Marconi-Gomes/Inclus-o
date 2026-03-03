@@ -37,6 +37,37 @@
         }
         .btn-menu:hover { transform: scale(1.05); box-shadow: 0 0 25px rgba(0, 242, 255, 0.6); }
 
+        /* CONTADOR ONLINE NEON */
+        #user-counter {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(11, 15, 36, 0.85);
+            border: 2px solid #00f2ff;
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #00f2ff;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.4);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: floatCounter 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        .dot-online {
+            width: 8px;
+            height: 8px;
+            background-color: #00f2ff;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #00f2ff;
+            animation: pulseDot 1.5s infinite;
+        }
+        @keyframes pulseDot { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        @keyframes floatCounter { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+
         /* MODAIS */
         .modal-overlay {
             position: fixed;
@@ -50,16 +81,29 @@
             justify-content: center;
             align-items: center;
             z-index: 2000;
+            padding: 20px;
         }
         .login-card {
             background: rgba(11, 15, 36, 0.95);
-            padding: 35px;
+            padding: 25px;
             border-radius: 20px;
             border: 2px solid #00f2ff;
             box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
-            width: 320px;
+            width: 100%;
+            max-width: 380px;
             text-align: center;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
         }
+        .scroll-content {
+            overflow-y: auto;
+            margin-bottom: 15px;
+            padding-right: 5px;
+        }
+        .scroll-content::-webkit-scrollbar { width: 5px; }
+        .scroll-content::-webkit-scrollbar-thumb { background: #00f2ff; border-radius: 10px; }
+
         .btn-acao {
             width: 100%;
             padding: 12px;
@@ -70,7 +114,29 @@
             font-weight: bold;
             cursor: pointer;
             text-transform: uppercase;
-            margin-top: 10px;
+            flex-shrink: 0;
+            transition: all 0.3s;
+        }
+
+        /* BOTÃO COPIAR PIX */
+        .btn-copiar-pix {
+            background: transparent;
+            border: 1px solid #00f2ff;
+            color: #00f2ff;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+        .btn-copiar-pix.sucesso {
+            background: #39ff14 !important;
+            border-color: #39ff14 !important;
+            color: #0b0f24 !important;
+            box-shadow: 0 0 15px #39ff14;
         }
 
         /* SIDEBAR */
@@ -91,20 +157,10 @@
         .sidebar-esquerda.ativo { left: 0; box-shadow: 5px 0 25px rgba(0,242,255,0.25); }
         .sidebar-esquerda ul { list-style: none; padding: 0; }
         .sidebar-esquerda ul li a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 1.2rem;
-            display: block;
-            padding: 12px 15px;
-            margin-bottom: 12px;
-            border-radius: 10px;
-            transition: all 0.3s;
+            text-decoration: none; color: #fff; font-size: 1.2rem; display: block;
+            padding: 12px 15px; margin-bottom: 12px; border-radius: 10px; transition: all 0.3s;
         }
-        .sidebar-esquerda ul li a:hover {
-            background: rgba(0,242,255,0.15);
-            color: #00f2ff;
-            transform: translateX(8px);
-        }
+        .sidebar-esquerda ul li a:hover { background: rgba(0,242,255,0.15); color: #00f2ff; transform: translateX(8px); }
 
         /* CONTEÚDO PRINCIPAL */
         .capa-container { width: 100%; height: 500px; background-color: #000; overflow: hidden; display: flex; justify-content: center; }
@@ -115,77 +171,33 @@
         .grid-servicos { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
 
         .card-servico {
-            background: rgba(255,255,255,0.05);
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid rgba(0,242,255,0.2);
-            transition: 0.3s;
-            cursor: pointer;
+            background: rgba(255,255,255,0.05); padding: 30px; border-radius: 15px;
+            border: 1px solid rgba(0,242,255,0.2); transition: 0.3s; cursor: pointer;
         }
         .card-servico:hover { transform: translateY(-10px); border-color: #00f2ff; background: rgba(0,242,255,0.05); }
 
-        /* SEÇÃO HOMENAGEM */
+        /* HOMENAGEM */
         .homenagem-section {
-            padding: 80px 20px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 40px;
-            margin: 60px auto;
-            max-width: 900px;
-            text-align: center;
+            padding: 80px 20px; background: rgba(255, 255, 255, 0.02); border-radius: 40px;
+            margin: 60px auto; max-width: 900px; text-align: center;
         }
         .homenagem-img {
-            width: 100%;
-            max-width: 700px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-            margin-bottom: 40px;
-            transition: all 0.6s ease;
-            cursor: pointer;
-            filter: grayscale(30%);
+            width: 100%; max-width: 700px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            margin-bottom: 40px; transition: all 0.6s ease; cursor: pointer; filter: grayscale(30%);
         }
         .homenagem-img:hover { transform: scale(1.04) translateY(-10px); filter: grayscale(0%); box-shadow: 0 20px 60px rgba(0, 242, 255, 0.3); }
         .homenagem-titulo { font-size: 2.8rem; color: #00f2ff; margin-bottom: 25px; font-weight: bold; }
         .homenagem-texto { font-size: 1.25rem; color: #d1d1d1; font-style: italic; line-height: 1.9; }
 
-        /* ESTILO DOS LINKS NOS MODAIS */
-        .link-video { 
-            padding: 12px; 
-            border: 1px solid rgba(0,242,255,0.2); 
-            border-radius: 8px; 
-            margin-bottom: 10px; 
-            cursor: pointer; 
-            transition: 0.2s; 
-            text-decoration: none;
-            display: block;
-        }
+        /* DOWNLOADS */
+        .link-video { padding: 12px; border: 1px solid rgba(0,242,255,0.2); border-radius: 8px; margin-bottom: 10px; cursor: pointer; transition: 0.2s; text-decoration: none; display: block; }
         .link-video:hover { background: rgba(0,242,255,0.1); border-color: #00f2ff; }
-        
-        /* GRID PARA AS PRANCHAS E JOGOS */
-        .grid-pranchas {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-        }
-        .item-prancha {
-            padding: 10px;
-            background: rgba(0, 242, 255, 0.1);
-            border: 1px solid #00f2ff;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
-            color: #00f2ff;
-            text-decoration: none;
-            text-align: center;
-        }
-        .item-prancha:hover {
-            background: #00f2ff;
-            color: #0b0f24;
-        }
+        .grid-pranchas { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 15px; }
+        .item-prancha { padding: 10px; background: rgba(0, 242, 255, 0.1); border: 1px solid #00f2ff; border-radius: 5px; cursor: pointer; font-weight: bold; transition: 0.3s; color: #00f2ff; text-decoration: none; text-align: center; }
+        .item-prancha:hover { background: #00f2ff; color: #0b0f24; }
 
         footer { padding: 40px; text-align: center; border-top: 1px solid rgba(0,242,255,0.3); margin-top: 40px; color: #888; }
-        .qr-code-area { background: white; padding: 10px; border-radius: 10px; width: 180px; margin: 0 auto 15px; }
+        .qr-code-area { background: white; padding: 10px; border-radius: 10px; width: 160px; margin: 0 auto 15px; flex-shrink: 0; }
         .qr-code-area img { width: 100%; display: block; }
     </style>
 </head>
@@ -194,54 +206,61 @@
 
     <button class="btn-menu" onclick="toggleMenu()">☰ Menu</button>
 
+    <div id="user-counter">
+        <span class="dot-online"></span>
+        <span id="online-count">1</span> ONLINE AGORA
+    </div>
+
     <div class="modal-overlay" id="modalDoacao">
         <div class="login-card">
-            <h2>Doação</h2>
-            <div class="qr-code-area"><img src="qrcode.png" alt="QR Code Pix"></div>
-            <p>"Compromisso com a autonomia e a transparência."</p>
+            <h2 style="color: #00f2ff; margin-bottom: 15px; flex-shrink: 0;">Apoie este Projeto</h2>
+            
+            <div class="scroll-content">
+                <button class="btn-copiar-pix" id="btnCopiarPix" onclick="copiarPix()">
+                    📋 Copiar Código Pix
+                </button>
+
+                <div class="qr-code-area" style="margin: 0 auto 15px;"><img src="qrcode.png" alt="QR Code Pix"></div>
+                
+                <div style="text-align: justify; font-size: 0.9rem; color: #d1d1d1; line-height: 1.5; padding: 0 5px;">
+                    <p>Este projeto é uma iniciativa <strong>independente e sem fins lucrativos</strong>. Não contamos com subsídios governamentais ou fundos corporativos.</p>
+                    <p>Sua contribuição viabiliza a manutenção do site e o desenvolvimento de novos materiais acessíveis para centenas de famílias.</p>
+                    <p style="border-left: 3px solid #00f2ff; padding-left: 10px; font-style: italic; color: #00f2ff;">"Ao apoiar, você impulsiona a autonomia e a inclusão de forma direta."</p>
+                </div>
+            </div>
+
             <button class="btn-acao" onclick="fecharModais()">Fechar</button>
         </div>
     </div>
 
     <div class="modal-overlay" id="modalVideos">
-        <div class="login-card" style="width: 350px;">
+        <div class="login-card">
             <h2>Canais Recomendados</h2>
-            <div class="link-video" onclick="window.open('https://www.youtube.com/@MundoBita', '_blank')"><h3>Mundo Bita</h3></div>
-            <div class="link-video" onclick="window.open('https://www.youtube.com/@galinhapintadinha', '_blank')"><h3>Galinha Pintadinha</h3></div>
+            <div class="scroll-content">
+                <div class="link-video" onclick="window.open('https://www.youtube.com/@MundoBita', '_blank')"><h3>Mundo Bita</h3></div>
+                <div class="link-video" onclick="window.open('https://www.youtube.com/@galinhapintadinha', '_blank')"><h3>Galinha Pintadinha</h3></div>
+            </div>
             <button class="btn-acao" onclick="fecharModais()" style="background:transparent; border:1px solid #00f2ff; color:#00f2ff;">Voltar</button>
         </div>
     </div>
 
     <div class="modal-overlay" id="modalMaterial">
-        <div class="login-card" style="width: 350px;">
+        <div class="login-card">
             <h2>Materiais</h2>
-            
-            <div class="link-video" onclick="window.open('Pintar.pdf', '_blank')">
-                <h3 style="color: #00f2ff; margin: 0;">Pintar</h3>
+            <div class="scroll-content">
+                <div class="link-video" onclick="window.open('Pintar.pdf', '_blank')"><h3 style="color: #00f2ff; margin: 0;">Pintar</h3></div>
+                <div class="link-video" onclick="abrirJogos()"><h3 style="color: #00f2ff; margin: 0;">Jogos de Recorte</h3></div>
+                <div class="link-video" onclick="window.open('Livro.pdf', '_blank')"><h3 style="color: #00f2ff; margin: 0;">Livro</h3></div>
+                <div class="link-video" onclick="abrirPranchas()"><h3 style="color: #00f2ff; margin: 0;">Pranchas de Comunicação</h3></div>
             </div>
-
-            <div class="link-video" onclick="abrirJogos()">
-                <h3 style="color: #00f2ff; margin: 0;">Jogos de Recorte</h3>
-            </div>
-
-            <div class="link-video" onclick="window.open('Livro.pdf', '_blank')">
-                <h3 style="color: #00f2ff; margin: 0;">Livro</h3>
-            </div>
-
-            <div class="link-video" onclick="abrirPranchas()">
-                <h3 style="color: #00f2ff; margin: 0;">Pranchas de Comunicação</h3>
-            </div>
-
             <button class="btn-acao" onclick="fecharModais()" style="background:transparent; border:1px solid #00f2ff; color:#00f2ff;">Voltar</button>
         </div>
     </div>
 
     <div class="modal-overlay" id="modalJogos">
-        <div class="login-card" style="width: 380px;">
+        <div class="login-card">
             <h2>Jogos para Baixar</h2>
-            <p style="font-size: 0.85rem; margin-bottom: 15px; color: #aaa;">Clique no nome para baixar a imagem.</p>
-            
-            <div style="text-align: left; max-height: 350px; overflow-y: auto; padding-right: 5px;">
+            <div class="scroll-content" style="text-align: left;">
                 <a href="Xadrez.jpeg" download class="link-video"><h3 style="color: #00f2ff; margin: 0; font-size: 1rem;">♟️ Xadrez</h3></a>
                 <a href="Dama.jpeg" download class="link-video"><h3 style="color: #00f2ff; margin: 0; font-size: 1rem;">⚪ Dama</h3></a>
                 <a href="Jogo da Memória do Animais.jpeg" download class="link-video"><h3 style="color: #00f2ff; margin: 0; font-size: 1rem;">🦁 Memória Animais</h3></a>
@@ -249,38 +268,36 @@
                 <a href="Domino Colorido.jpeg" download class="link-video"><h3 style="color: #00f2ff; margin: 0; font-size: 1rem;">🌈 Dominó Colorido</h3></a>
                 <a href="Domino Preto e Branco.jpeg" download class="link-video"><h3 style="color: #00f2ff; margin: 0; font-size: 1rem;">🏁 Dominó P&B</h3></a>
             </div>
-
-            <button class="btn-acao" onclick="voltarParaMaterialDeJogos()" style="background:transparent; border:1px solid #00f2ff; color:#00f2ff; margin-top: 15px;">Voltar</button>
+            <button class="btn-acao" onclick="voltarParaMaterialDeJogos()" style="background:transparent; border:1px solid #00f2ff; color:#00f2ff; margin-top: 5px;">Voltar</button>
         </div>
     </div>
 
     <div class="modal-overlay" id="modalPranchas">
-        <div class="login-card" style="width: 350px;">
+        <div class="login-card">
             <h2>Escolha a Prancha</h2>
-            <p style="font-size: 0.9rem; margin-bottom: 15px;">Clique para baixar o arquivo PNG.</p>
-            
-            <div class="grid-pranchas">
-                <a href="P1.png" download class="item-prancha">P1</a>
-                <a href="P2.png" download class="item-prancha">P2</a>
-                <a href="P3.png" download class="item-prancha">P3</a>
-                <a href="P4.png" download class="item-prancha">P4</a>
-                <a href="P5.png" download class="item-prancha">P5</a>
-                <a href="P6.png" download class="item-prancha">P6</a>
-                <a href="P7.png" download class="item-prancha">P7</a>
-                <a href="P8.png" download class="item-prancha">P8</a>
-                <a href="P9.png" download class="item-prancha">P9</a>
-                <a href="P10.png" download class="item-prancha">P10</a>
-                <a href="P11.png" download class="item-prancha">P11</a>
+            <div class="scroll-content">
+                <div class="grid-pranchas">
+                    <a href="P1.png" download class="item-prancha">P1</a>
+                    <a href="P2.png" download class="item-prancha">P2</a>
+                    <a href="P3.png" download class="item-prancha">P3</a>
+                    <a href="P4.png" download class="item-prancha">P4</a>
+                    <a href="P5.png" download class="item-prancha">P5</a>
+                    <a href="P6.png" download class="item-prancha">P6</a>
+                    <a href="P7.png" download class="item-prancha">P7</a>
+                    <a href="P8.png" download class="item-prancha">P8</a>
+                    <a href="P9.png" download class="item-prancha">P9</a>
+                    <a href="P10.png" download class="item-prancha">P10</a>
+                    <a href="P11.png" download class="item-prancha">P11</a>
+                </div>
             </div>
-
-            <button class="btn-acao" onclick="voltarParaMaterialDePranchas()" style="background:transparent; border:1px solid #00f2ff; color:#00f2ff; margin-top: 20px;">Voltar</button>
+            <button class="btn-acao" onclick="voltarParaMaterialDePranchas()" style="background:transparent; border:1px solid #00f2ff; color:#00f2ff;">Voltar</button>
         </div>
     </div>
 
     <nav class="sidebar-esquerda" id="menuLateral">
         <h2>Menu</h2>
         <ul>
-            <li><a href="https://www.papajogos.com.br/" target="_blank">Jogos Online</a></li>
+            <li><a href="https://happytea.com.br/" target="_blank">Jogos Online</a></li>
             <li><a href="#" onclick="abrirVideos()">Vídeos</a></li>
             <li><a href="#" onclick="abrirMaterial()">Material</a></li>
             <li><a href="#" onclick="abrirDoacao()" style="color:#00f2ff;">Doação</a></li>
@@ -288,45 +305,23 @@
     </nav>
 
     <main>
-        <header class="capa-container">
-            <img src="1.png" alt="Capa" class="capa-img">
-        </header>
-
+        <header class="capa-container"><img src="1.png" alt="Capa" class="capa-img"></header>
         <div class="conteudo-central">
             <section class="secao">
                 <h2 class="titulo-secao">Nossos Serviços</h2>
                 <div class="grid-servicos">
-                    <div class="card-servico">
-                        <h3>Apoio Pedagógico</h3>
-                        <p>Desenvolvimento de materiais estruturados e adaptados.</p>
-                    </div>
-                    <div class="card-servico">
-                        <h3>Recursos Visuais</h3>
-                        <p>Criação de painéis e rotinas visuais personalizadas.</p>
-                    </div>
-                    <div class="card-servico">
-                        <h3>Inclusão Digital</h3>
-                        <p>Ferramentas voltadas para acessibilidade.</p>
-                    </div>
+                    <div class="card-servico"><h3>Apoio Pedagógico</h3><p>Desenvolvimento de materiais estruturados e adaptados.</p></div>
+                    <div class="card-servico"><h3>Recursos Visuais</h3><p>Criação de painéis e rotinas visuais personalizadas.</p></div>
+                    <div class="card-servico"><h3>Inclusão Digital</h3><p>Ferramentas voltadas para acessibilidade.</p></div>
                 </div>
             </section>
-
             <section class="homenagem-section">
                 <img src="mãe.jpeg" alt="Homenagem" class="homenagem-img">
                 <h2 class="homenagem-titulo">Eu vejo você</h2>
-                <p class="homenagem-texto">
-                    "Há uma exaustão que as palavras não alcançam e uma solidão que o mundo raramente compreende. 
-                    Ser mãe atípica é viver em um estado de entrega que exige tudo de si, todos os dias. 
-                    Não queremos romantizar o seu cansaço, mas sim honrar a sua dignidade. 
-                    Você é a prova viva de que o amor não é apenas um sentimento, mas uma decisão corajosa 
-                    de permanecer, de lutar e de acreditar quando ninguém mais sabe como."
-                </p>
+                <p class="homenagem-texto">"Há uma exaustão que as palavras não alcançam e uma solidão que o mundo raramente compreende. Ser mãe atípica é viver em um estado de entrega que exige tudo de si, todos os dias. Não queremos romantizar o seu cansaço, mas sim honrar a sua dignidade. Você é a prova viva de que o amor não é apenas um sentimento, mas uma decisão corajosa de permanecer, de lutar e de acreditar quando ninguém mais sabe como."</p>
             </section>
         </div>
-
-        <footer>
-            <p>© 2026 Projeto Inclusão. Tecnologia e Educação.</p>
-        </footer>
+        <footer><p>© 2026 Projeto Inclusão. Tecnologia e Educação.</p></footer>
     </main>
 
     <script>
@@ -341,7 +336,6 @@
         function abrirVideos() { fecharMenu(); document.getElementById('modalVideos').style.display = 'flex'; }
         function abrirMaterial() { fecharMenu(); document.getElementById('modalMaterial').style.display = 'flex'; }
         
-        // Funções para Pranchas
         function abrirPranchas() {
             document.getElementById('modalMaterial').style.display = 'none';
             document.getElementById('modalPranchas').style.display = 'flex';
@@ -351,7 +345,6 @@
             document.getElementById('modalMaterial').style.display = 'flex';
         }
 
-        // Funções para Jogos
         function abrirJogos() {
             document.getElementById('modalMaterial').style.display = 'none';
             document.getElementById('modalJogos').style.display = 'flex';
@@ -361,14 +354,37 @@
             document.getElementById('modalMaterial').style.display = 'flex';
         }
 
+        // LÓGICA COPIAR PIX
+        function copiarPix() {
+            const codigoPix = "00020126580014BR.GOV.BCB.PIX01360dd44813-8879-4e14-ab24-b0b4b022ead65204000053039865802BR5922Marconi Gomes da Silva6009SAO PAULO621405102PJ2HB8WML6304CC6A";
+            const btn = document.getElementById('btnCopiarPix');
+            
+            navigator.clipboard.writeText(codigoPix).then(() => {
+                btn.classList.add('sucesso');
+                btn.innerText = "✅ Copiado!";
+                
+                setTimeout(() => {
+                    btn.classList.remove('sucesso');
+                    btn.innerText = "📋 Copiar Código Pix";
+                }, 2000);
+            });
+        }
+
+        function simularOnline() {
+            const countEl = document.getElementById('online-count');
+            let atual = parseInt(countEl.innerText);
+            let mudanca = Math.random() > 0.5 ? 1 : -1;
+            let novo = atual + mudanca;
+            if (novo < 1) novo = 1;
+            if (novo > 4) novo = 3;
+            countEl.innerText = novo;
+        }
+        setInterval(simularOnline, 8000);
+
         menu.addEventListener('mouseleave', fecharMenu);
-
         document.addEventListener('click', function(e) {
-            if (!menu.contains(e.target) && !botaoMenu.contains(e.target)) {
-                fecharMenu();
-            }
+            if (!menu.contains(e.target) && !botaoMenu.contains(e.target)) fecharMenu();
         });
-
         window.onclick = function(e) { 
             if (e.target.classList.contains('modal-overlay')) fecharModais(); 
         }
