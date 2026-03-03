@@ -1,0 +1,46 @@
+/* CAPA (Ajustada com Overlay) */
+.capa-container {
+    width: 100%;
+    max-width: 1600px;
+    margin: 0 auto;
+    height: 500px; 
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #000;
+    position: relative; /* Necessário para o overlay se posicionar */
+}
+
+/* Camada Escura (Overlay) */
+.capa-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 50% de transparência preta */
+    z-index: 1;
+}
+
+.capa-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Garante que o texto fique acima do overlay */
+.capa-container h1 {
+    position: relative;
+    z-index: 2;
+    font-size: 3rem;
+    text-align: center;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+}
+header {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('sua-imagem.jpg');
+    background-size: cover;
+    background-position: center;
+}
